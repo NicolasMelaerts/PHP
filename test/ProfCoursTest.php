@@ -78,9 +78,9 @@ class ProfCoursTest extends TestCase
             new Prof("Nom_prof5", "Prenom_prof5", "10/05/1982", "lieu_prof5"),      // idprof = 5
             new Prof("Nom_prof6", "Prenom_prof6", "10/06/1982", "lieu_prof6"),      // idprof = 6
             new Prof("Nom_prof7", "Prenom_prof7", "10/07/1982", "lieu_prof7"),      // idprof = 7
-
+            new Prof("Nom_prof8", "Prenom_prof8", "10/08/1982", "lieu_prof8"),      // idprof = 8       ** A SUPPRIMER **
             new Prof("Nom_prof9", "Prenom_prof9", "10/09/1982", "lieu_prof9"),      // idprof = 9
-            new Prof("Nom_prof10", "Nicolas", "10/10/1982", "lieu_prof10")    // idprof = 10      ** A MODIFIER **
+            new Prof("Nom_prof10", "Prenom_prof10", "10/10/1982", "lieu_prof10")    // idprof = 10      ** A MODIFIER **
         ];
 
         self::$cours_a = [
@@ -90,19 +90,18 @@ class ProfCoursTest extends TestCase
             new Cours("Cours4", "2", 3),       // idcours = 4
             new Cours("Cours5", "3", 3),       // idcours = 5
             new Cours("Cours6", "2", 4),       // idcours = 6
-
+            new Cours("Cours7", "3", 5),       // idcours = 7   ** A SUPPRIMER **
             new Cours("Cours8", "4", 5),       // idcours = 8
-            new Cours("Cours9", "6", 5),        // idcours = 9   ** A MODIFIER **
-            new Cours("IoT","10", 1),
-            new Cours("IA","12", 3),
-            new Cours("EDL","5", 6)
-
+            new Cours("Cours9", "3", 5),        // idcours = 9   ** A MODIFIER **
             
             /**
             *
             * Question 7 : Insérer les enregistrements suivantes dans la table cours
             *
             */
+            new Cours("IoT","10", 1),
+            new Cours("IA","12", 3),
+            new Cours("EDL","5",6)
 
         ];
         
@@ -185,13 +184,17 @@ class ProfCoursTest extends TestCase
             $cours->add($conn);
         }
         
+        /**
+        *
+        * Question 8 : Dans la fonction « testAdd() », s’inspirer de test d’ajout des profs pour tester l’ajout des cours.   
+        *
+        */
 
         // Vérification du nombre d'enregistrements pour les cours
         $expected_cours = count(self::$cours_a);
         $num_records_cours = Cours::count($conn);
         $this->assertEquals($expected_cours, $num_records_cours, "Enregistrement des cours ...\n");
         $this->assertCount($num_records_cours, self::$cours_a, "Enregistrement des cours ...\n");
-
         
     }
     
