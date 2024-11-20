@@ -90,9 +90,13 @@ class ProfCoursTest extends TestCase
             new Cours("Cours4", "2", 3),       // idcours = 4
             new Cours("Cours5", "3", 3),       // idcours = 5
             new Cours("Cours6", "2", 4),       // idcours = 6
-            new Cours("Cours7", "3", 5),       // idcours = 7   ** A SUPPRIMER **
+
             new Cours("Cours8", "4", 5),       // idcours = 8
-            new Cours("Cours9", "3", 5),        // idcours = 9   ** A MODIFIER **
+            new Cours("Cours9", "6", 5),        // idcours = 9   ** A MODIFIER **
+            new Cours("IoT","10", 1),
+            new Cours("IA","12", 3),
+            new Cours("EDL","5", 6)
+
             
             /**
             *
@@ -181,11 +185,13 @@ class ProfCoursTest extends TestCase
             $cours->add($conn);
         }
         
-        /**
-        *
-        * Question 8 : Dans la fonction « testAdd() », s’inspirer de test d’ajout des profs pour tester l’ajout des cours.   
-        *
-        */
+
+        // Vérification du nombre d'enregistrements pour les cours
+        $expected_cours = count(self::$cours_a);
+        $num_records_cours = Cours::count($conn);
+        $this->assertEquals($expected_cours, $num_records_cours, "Enregistrement des cours ...\n");
+        $this->assertCount($num_records_cours, self::$cours_a, "Enregistrement des cours ...\n");
+
         
     }
     
@@ -218,6 +224,14 @@ class ProfCoursTest extends TestCase
         * s’inspirer de test de la sélection et affichage des profs pour tester la sélection et l’affichage des cours.   
         *
         */
+
+        $record_cours_a = Cours::printAll($conn);
+        print "########## - LISTE DES COURS - AVANT TOUT ########## \n";
+        foreach ( $record_cours_a as $record_cours ) {
+            print $record_cours;
+        }
+        print "################################################################\n\n";
+        $this->assertCount(count(Self::$cours_a), $record_cours_a, "Nombre d'enregistrement égale pour Cours\n");
   
         
     }
